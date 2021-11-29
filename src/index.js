@@ -73,8 +73,12 @@ function serviceNestsuite(
       method: httpMethod,
       data: parameters,
     }
+    function char(param) {
+      console.log('char: ',param)
+      return param.replace('-', '_')
+  }
     var headerWithRealm = oauth.toHeader(oauth.authorize(request_data, token))
-    headerWithRealm.Authorization += ',realm="' + accountId + '"'
+    headerWithRealm.Authorization += ',realm="' + char(accountId) + '"'
     return headerWithRealm
   }
   var restUrl = domainBase + path
