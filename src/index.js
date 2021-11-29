@@ -18,12 +18,14 @@ app.post('/sign.js', (req, res) => {
   const { consumeri, consumers, tokeni, tokens } = req.headers
   console.log(account_id)
   console.log('consumeri: ', consumeri)
-  console.log('consumeri: ', consumers)
-  console.log('consumeri: ', tokeni)
-  console.log('consumeri: ', tokens)
+  console.log('consumers: ', consumers)
+  console.log('tokeni: ', tokeni)
+  console.log('tokens: ', tokens)
   let dataSign = serviceNestsuite(domainBase, account_id, consumeri, consumers, tokeni, tokens, path, pathEncoded)
     res.json(dataSign) 
+    console.log(pathEncoded)
     console.log(dataSign)
+
 })
 //start
 app.listen(app.get('port'), () => {})
