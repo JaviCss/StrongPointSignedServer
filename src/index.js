@@ -40,6 +40,27 @@ function serviceNestsuite(
   path,
   pathEncoded
 ) {
+ 
+  var restUrl = domainBase + path
+  //OPTIONS CREATION
+  var headerWithRealm = generateTbaHeader(
+    restUrl,
+    account_id,
+    consumer_key,
+    consumer_secret,
+    token_id,
+    token_secret
+  )
+  let urln = domainBase + pathEncoded
+  let options = {
+    url: urln,
+    type: 'GET',
+    headers: headerWithRealm,
+    cors: false,
+    contentType: 'application/json',
+  }
+  return options 
+  
   function generateTbaHeader(
     domainBase,
     accountId,
@@ -79,33 +100,11 @@ function serviceNestsuite(
       method: httpMethod,
       data: parameters,
     }
-    function char(param) {
-      console.log('char: ',param)
-      return param.replace('-', '_')
-  }
+    
     var headerWithRealm = oauth.toHeader(oauth.authorize(request_data, token))
-    headerWithRealm.Authorization += ',realm="' + char(accountId) + '"'
+    headerWithRealm.Authorization += ',realm="' + accountId + '"'
     return headerWithRealm
   }
-  var restUrl = domainBase + path
-  //OPTIONS CREATION
-  var headerWithRealm = generateTbaHeader(
-    restUrl,
-    account_id,
-    consumer_key,
-    consumer_secret,
-    token_id,
-    token_secret
-  )
-  let urln = domainBase + pathEncoded
-  let options = {
-    url: urln,
-    type: 'GET',
-    headers: headerWithRealm,
-    cors: false,
-    contentType: 'application/json',
-  }
-  return options
 }
 
 
